@@ -1,0 +1,22 @@
+,Company ID,Mega Industry,Exec ID,Long title,Short title,Level,Boss ID,Model Score
+0,zn94j,Service,qn8nye,Managing Director,Managing Director,CEO,,
+1,zn94j,Service,q67195,Director of Operations,Operations,N-1,,
+2,zn94j,Service,96x18v,Group Director of Strategy,Strategy,N-1,,
+3,zn94j,Service,mpw8ll,Director of Finance,Finance,N-1,,
+4,zn94j,Service,wqlpym,Director of Customer Experience,Customer Experience,N-1,,
+5,zn94j,Service,exrvo4,Group Business Director,Business,N-1,,
+6,zn94j,Service,lxjxp8,Executive Creative Director,Creative,N-1,,
+7,zn94j,Service,ownw1z,Group Business Director,Business,N-1,,
+8,zn94j,Service,2j0m12,Group Business Director,Business,N-1,,
+0,zn94j,Service,owz0m8,Digital Creative Director,Digital Creative,N-2,lxjxp8,0.8333333333333334
+1,zn94j,Service,owz0m8,Digital Creative Director,Digital Creative,N-2,q67195,0.0
+2,zn94j,Service,owz0m8,Digital Creative Director,Digital Creative,N-2,96x18v,0.0
+3,zn94j,Service,p81l0p,Design Director,Design,N-2,lxjxp8,0.8771929824561403
+4,zn94j,Service,p81l0p,Design Director,Design,N-2,q67195,0.0
+5,zn94j,Service,p81l0p,Design Director,Design,N-2,96x18v,0.0
+6,zn94j,Service,w2w46z,Director of Experience Design,Experience Design,N-2,lxjxp8,0.8
+7,zn94j,Service,w2w46z,Director of Experience Design,Experience Design,N-2,q67195,0.0
+8,zn94j,Service,w2w46z,Director of Experience Design,Experience Design,N-2,96x18v,0.0
+9,zn94j,Service,zq4x1q,Head of Content Production,Content Production,N-2,lxjxp8,0.5
+10,zn94j,Service,zq4x1q,Head of Content Production,Content Production,N-2,q67195,0.0
+11,zn94j,Service,zq4x1q,Head of Content Production,Content Production,N-2,96x18v,0.0
