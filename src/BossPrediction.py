@@ -236,21 +236,46 @@ class Model:
 
 class ProxyCalculator:
     def __init__(self, groupby_col='mega.industry'):
-        self.groupby_col = groupby_col
+        """
+        :param groupby_col: str: (default='mega.industry') name of the column by which we aggregate the link.rates
+        """
+        self.groupby_col = groupby_col.lower().replace(' ', '.')
         self.data = None
         self.proxies = None
 
     def fit(self, data, proxies_size):
+        """
+        Fit the calculator to the data by selecting the subset of proxy pairs that occur the most in the training set.
+        :param data: DataFrame : training set
+        :param proxies_size: int : (Best value ~25000) size of the subset of proxy pairs that occur the most in the
+        training set
+        """
         self.proxies = data.groupby([self.groupby_col]).apply(
             lambda x: x.nlargest(proxies_size, 'match.count')).reset_index(drop=True)
 
     def calculate_proxies(self, data, alpha=0.7, nb_proxies=5):
+        """
+
+        :param data: DataFrame : contains the inputs, i.e. that data point that need predictions
+        :param alpha: float : (between 0 and 1) the weight of short titles compared to long titles for the proxy
+        calculation
+        :param nb_proxies: number of proxies amongst which we take the weighted average of link.rate
+        :return: DataFrame : input data plus the column link.rate.proxy
+        """
         data = data.merge(self.proxies, how='left', on=[self.groupby_col], suffixes=['', '.proxy'])
         data = self.__avg_proxy_link(data, alpha, nb_proxies)
         return data
 
     @staticmethod
     def __cosine_sim(data, col1, col2, colname):
+        """
+        Caluculate the cosine similarity between columns col1 and col2 of data
+        :param data: DataFrame :
+        :param col1: first column to compute the cosine similarity
+        :param col2: second column to compute the cosine similarity
+        :param colname: name of the outputted column (where the result is saved)
+        :return: DataFrame : input data plus the column containing the cosine similarity
+        """
         data[col1 + '.split'] = data[col1].str.split()
         data[col2 + '.split'] = data[col2].str.split()
         data[colname + '.overlap'] = [len(set(a).intersection(b)) for a, b in
@@ -261,6 +286,13 @@ class ProxyCalculator:
         return data
 
     def __title_sim(self, data, level, alpha):
+        """
+        Calculates the title similarity defined as a weighted average (alpha) of the long.title.sim and short.title.sim
+        :param data: DataFrame:
+        :param level: (n1 or n2)
+        :param alpha: weight given to the short.title.sim as opposed to long.title.sim
+        :return: DataFrame: input data plus the column containing the title similarity
+        """
         data = self.__cosine_sim(data, 'long.title.stem.' + level, 'long.title.stem.' + level + '.proxy',
                                  'long.titles.' + level)
         data = self.__cosine_sim(data, 'short.title.stem.' + level, 'short.title.stem.' + level + '.proxy',
@@ -270,12 +302,25 @@ class ProxyCalculator:
         return data
 
     def __pair_sim(self, data, alpha):
+        """
+        Calculates pair similarity which is the product of n1 title similarity and n2 title similarity
+        :param data: DataFrame:
+        :param alpha: weight given to the short.title.sim as opposed to long.title.sim
+        :return:
+        """
         data = self.__title_sim(data, 'n1', alpha)
         data = self.__title_sim(data, 'n2', alpha)
         data['pair.sim'] = data['titles.sim.n1'] * data['titles.sim.n2']
         return data
 
     def __avg_proxy_link(self, data, alpha, nb_proxies):
+        """
+        Calculates the weighted average of link.rates amongst the most similar proxies
+        :param data: DataFrame: 
+        :param alpha: weight given to the short.title.sim as opposed to long.title.sim
+        :param nb_proxies: number of proxies to average on
+        :return: DataFrame:
+        """
         data = self.__pair_sim(data, alpha)
         data = data.groupby(['exec.id.n2', 'exec.id.n1']).apply(
             lambda x: x.nlargest(nb_proxies, 'pair.sim')).reset_index(drop=True)

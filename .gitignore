@@ -124,10 +124,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 data/data_20190804.csv
-
 data/data_20190804_test.csv
-data/example_test_data.csv
-data/example_test_data.csv
 models/model_25000.pkl
 models/model_50000.pkl
 processed/predictions_proxy_25000.csv
