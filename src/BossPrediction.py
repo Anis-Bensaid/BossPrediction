@@ -5,11 +5,18 @@ import time
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 
+try:
+    stopwords.words('english')
+except LookupError:
+    import nltk
+    nltk.download('stopwords')
+
 
 class Model:
     def __init__(self):
         self.data = None
         self.groupby_col = None
+        self.proxies_size = None
         self.link_rate_table = None
         self.proxy_calculator = None
 
@@ -32,6 +39,7 @@ class Model:
             print('Fitting the model...')
         start = time.time()
         self.groupby_col = groupby_col.lower().replace(' ', '.')
+        self.proxies_size = proxies_size
         self.data = self.__read_data(data, data_path)
         self.data = self.__check_data_validity(self.data, verbose=verbose)
         self.data = self.__format_data(self.data, verbose=verbose)
@@ -43,23 +51,39 @@ class Model:
             print('Fitting the proxy calculator...')
         start = time.time()
         self.proxy_calculator = ProxyCalculator(self.groupby_col)
-        self.proxy_calculator.fit(self.data, proxies_size)
+        self.proxy_calculator.fit(self.data, self.proxies_size)
         if verbose:
             print('Time elapsed: ', time.time() - start)
 
-    def predict(self, data_path=None, data=None, nb_suggestions=1, use_proxies=True, alpha=0.7, nb_proxies=5,
-                verbose=True):
+    def predict(self, data_path=None, data=None, nb_suggestions=1, use_proxies=True, proxies_size=None,
+                groupby_col=None, alpha=0.7, nb_proxies=5, verbose=True):
         """
         Given a DataFrame with a list of N-1 and N-2, predicts the boss IDs of N-2.
+        :return:
         :param data: DataFrame: training set (provide either this or data_path)
         :param data_path: str: path for the training set (provide either this or data)
         :param nb_suggestions: int: number of outputted predictions per executive id
         :param use_proxies: Bool: whether or not to use proxies
+        :param proxies_size: int: size of the subset of proxy pairs that occur the most in the training set
+        :param groupby_col: str: name of the column by which we aggregate the link.rates
         :param alpha: the weight given to the short title similarity
         :param nb_proxies: number of proxies to average on for the link.rate.proxy
         :param verbose: bool: (default=True) print the steps
         :return: DataFrame: the same DataFrame data, with two extra columns: Boss ID and Model Score
         """
+        # If the user decides to change the proxy calculator parameters
+        if use_proxies and (proxies_size or groupby_col):
+            if (proxies_size != self.proxies_size) or (groupby_col != self.groupby_col):
+                if verbose:
+                    print('Change in proxy calculator parameters detected...')
+                    print('Fitting the new proxy calculator...')
+                start = time.time()
+                self.proxy_calculator = ProxyCalculator(self.groupby_col)
+                if proxies_size:
+                    self.proxies_size = proxies_size
+                self.proxy_calculator.fit(self.data, proxies_size)
+                if verbose:
+                    print('Time elapsed: ', time.time() - start)
         start = time.time()
         input_data = self.__read_data(data, data_path)
         prediction = self.__check_data_validity(input_data, verbose=verbose)
@@ -70,6 +94,8 @@ class Model:
         if use_proxies:
             prediction_to_proxies = prediction[prediction['link.rate'].isna()]
             if not prediction_to_proxies.empty:
+                if verbose:
+                    print('Calculating proxies for', len(prediction_to_proxies), 'pairs...')
                 link_rate_table_proxies = self.proxy_calculator.calculate_proxies(prediction_to_proxies, alpha,
                                                                                   nb_proxies)
                 prediction = prediction.merge(link_rate_table_proxies, how='left', on=['exec.id.n1', 'exec.id.n2'])
@@ -308,8 +334,8 @@ class ProxyCalculator:
         :param alpha: weight given to the short.title.sim as opposed to long.title.sim
         :return:
         """
-        data = self.__title_sim(data, 'n1', alpha)
-        data = self.__title_sim(data, 'n2', alpha)
+        data = self.__title_sim(data, level='n1', alpha=alpha)
+        data = self.__title_sim(data, level='n2', alpha=alpha)
         data['pair.sim'] = data['titles.sim.n1'] * data['titles.sim.n2']
         return data
 
@@ -325,5 +351,5 @@ class ProxyCalculator:
         data = data.groupby(['exec.id.n2', 'exec.id.n1']).apply(
             lambda x: x.nlargest(nb_proxies, 'pair.sim')).reset_index(drop=True)
         data = data.groupby(['exec.id.n2', 'exec.id.n1']).apply(
-            lambda x: np.average(x['link.rate.proxy'], weights=x['pair.sim'])).to_frame('link.rate.proxy')
+            lambda x: np.ma.average(x['link.rate.proxy'], weights=x['pair.sim'])).to_frame('link.rate.proxy').fillna(0)
         return data.reset_index()

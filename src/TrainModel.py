@@ -7,5 +7,5 @@ if __name__ == '__main__':
     mod = Model()
     mod.fit(data_path=data_path, proxies_size=proxies_size)
     # Read path to output data. Ex : ../models/model_25000.pkl
-    output_path = input("\nType in the path for the output file: ")
+    output_path = input("\nType in the path for the output file (should end with .pkl): ")
     mod.save(output_path)
