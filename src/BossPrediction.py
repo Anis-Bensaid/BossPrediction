@@ -302,13 +302,7 @@ class ProxyCalculator:
         :param colname: name of the outputted column (where the result is saved)
         :return: DataFrame : input data plus the column containing the cosine similarity
         """
-        data[col1 + '.split'] = data[col1].str.split()
-        data[col2 + '.split'] = data[col2].str.split()
-        data[colname + '.overlap'] = [len(set(a).intersection(b)) for a, b in
-                                      zip(data[col1 + '.split'], data[col2 + '.split'])]
-        data[colname + '.sim'] = data[colname + '.overlap'] / (
-                data[col1 + '.split'].str.len() * data[col2 + '.split'].str.len())
-        data.drop([col1 + '.split', col2 + '.split', colname + '.overlap'], axis=1, inplace=True)
+        data[colname + '.sim'] = [textdistance.cosine(a, b) for a, b in zip(data[col1], data[col2])]
         return data
 
     def __title_sim(self, data, level, alpha):

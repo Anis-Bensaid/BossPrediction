@@ -5,14 +5,21 @@ w02dz,Service,zd1edv,Senior Vice President Operations and Human Resources,Operat
 w02dz,Service,jo91ov,Chief Information Officer,CIO,N-1,,,
 w02dz,Service,qnn6en,General Counsel,Legal,N-1,,,
 w02dz,Service,qn8p2j,Chief Financial Officer and Chief Operating Officer,CFO & COO,N-1,,,
-w02dz,Service,vpy6p0,Vice President of Operations,Operations,N-2,zd1edv,False,1.0
-w02dz,Service,vpy6p0,Vice President of Operations,Operations,N-2,qn8p2j,False,0.9230769230769231
-w02dz,Service,689q84,"Director, People Operations",HR Operations,N-2,jo91ov,False,0.0
-w02dz,Service,689q84,"Director, People Operations",HR Operations,N-2,qnn6en,False,0.0
-w02dz,Service,9z4wdr,"Director, People Experience",HR Experience,N-2,,,
-w02dz,Service,w9drw8,"Vice President, Information Technology Operations",IT Operations,N-2,jo91ov,False,0.8
-w02dz,Service,w9drw8,"Vice President, Information Technology Operations",IT Operations,N-2,qnn6en,False,0.0
-w02dz,Service,19re0e,"Vice President, Administration and Human Resources",Admin & HR,N-2,jo91ov,False,0.0
+w02dz,Service,vpy6p0,Vice President of Operations,Operations,N-2,zd1edv,True,1.0
+w02dz,Service,vpy6p0,Vice President of Operations,Operations,N-2,qn8p2j,True,0.9230769230769231
+w02dz,Service,vpy6p0,Vice President of Operations,Operations,N-2,jo91ov,True,0.03571428571428571
+w02dz,Service,689q84,"Director, People Operations",HR Operations,N-2,qn8p2j,False,0.0031446540880503146
+w02dz,Service,689q84,"Director, People Operations",HR Operations,N-2,zd1edv,False,0.0
+w02dz,Service,689q84,"Director, People Operations",HR Operations,N-2,jo91ov,True,0.0
+w02dz,Service,9z4wdr,"Director, People Experience",HR Experience,N-2,zd1edv,False,0.9527027027027029
+w02dz,Service,9z4wdr,"Director, People Experience",HR Experience,N-2,qn8p2j,False,0.05972586172142714
+w02dz,Service,9z4wdr,"Director, People Experience",HR Experience,N-2,jo91ov,False,0.05972586172142713
+w02dz,Service,w9drw8,"Vice President, Information Technology Operations",IT Operations,N-2,jo91ov,True,0.8
+w02dz,Service,w9drw8,"Vice President, Information Technology Operations",IT Operations,N-2,qn8p2j,False,0.0031446540880503146
+w02dz,Service,w9drw8,"Vice President, Information Technology Operations",IT Operations,N-2,zd1edv,False,0.0
+w02dz,Service,19re0e,"Vice President, Administration and Human Resources",Admin & HR,N-2,zd1edv,False,0.9527027027027029
+w02dz,Service,19re0e,"Vice President, Administration and Human Resources",Admin & HR,N-2,qn8p2j,False,0.03305785123966942
+w02dz,Service,19re0e,"Vice President, Administration and Human Resources",Admin & HR,N-2,jo91ov,True,0.0
 96pnd,Health Care,2re7wj,Chief Executive Officer and Director,CEO & Director,CEO,,,
 96pnd,Health Care,9zxlw4,Chairman of the Board,Chairman of the Board,Board,,,
 96pnd,Health Care,r0ypoq,Director,Director,Board,,,
@@ -26,16 +33,27 @@ w02dz,Service,19re0e,"Vice President, Administration and Human Resources",Admin 
 96pnd,Health Care,qnq7d5,General Counsel,Legal,N-1,,,
 96pnd,Health Care,719ymr,Chief People Officer,HR,N-1,,,
 96pnd,Health Care,56n1lv,Chief Financial Officer,CFO,N-1,,,
-96pnd,Health Care,znz6vj,"Vice President, Finance",Finance,N-2,56n1lv,False,0.9852941176470589
-96pnd,Health Care,znz6vj,"Vice President, Finance",Finance,N-2,1xpmwq,False,0.0
-96pnd,Health Care,v2n166,"Vice President, Global Support and Sales Operations",Support & Sales,N-2,,,
-96pnd,Health Care,jedw1q,"Vice President, Product, R&D and Strategy","Product, R&D & Strategy",N-2,,,
-96pnd,Health Care,yrq8jv,"Senior Vice President, Commercial Operations",Commercial Operations,N-2,de7w9m,False,0.8888888888888888
-96pnd,Health Care,yrq8jv,"Senior Vice President, Commercial Operations",Commercial Operations,N-2,1xpmwq,False,0.0
-96pnd,Health Care,q6dznn,"Vice President, Software and Infrastructure",Software & Infrastructure,N-2,,,
-96pnd,Health Care,8jm7rm,"Vice President, Marketing",Marketing,N-2,de7w9m,False,0.7647058823529411
-96pnd,Health Care,8jm7rm,"Vice President, Marketing",Marketing,N-2,56n1lv,False,0.013888888888888888
-96pnd,Health Care,qy68wn,"Senior Vice President, Global Sales",Sales,N-2,de7w9m,False,0.9230769230769231
-96pnd,Health Care,qy68wn,"Senior Vice President, Global Sales",Sales,N-2,e0yvw2,False,0.0
-96pnd,Health Care,56eo0v,"Vice President, Software Engineering",Software Engineering,N-2,qnq7d5,False,0.0
-96pnd,Health Care,56eo0v,"Vice President, Software Engineering",Software Engineering,N-2,719ymr,False,0.0
+96pnd,Health Care,znz6vj,"Vice President, Finance",Finance,N-2,56n1lv,True,0.9852941176470589
+96pnd,Health Care,znz6vj,"Vice President, Finance",Finance,N-2,1xpmwq,True,0.0
+96pnd,Health Care,znz6vj,"Vice President, Finance",Finance,N-2,e0yvw2,True,0.0
+96pnd,Health Care,v2n166,"Vice President, Global Support and Sales Operations",Support & Sales,N-2,de7w9m,False,0.9230769230769232
+96pnd,Health Care,v2n166,"Vice President, Global Support and Sales Operations",Support & Sales,N-2,1xpmwq,False,0.0
+96pnd,Health Care,v2n166,"Vice President, Global Support and Sales Operations",Support & Sales,N-2,e0yvw2,False,0.0
+96pnd,Health Care,jedw1q,"Vice President, Product, R&D and Strategy","Product, R&D & Strategy",N-2,1xpmwq,False,1.0
+96pnd,Health Care,jedw1q,"Vice President, Product, R&D and Strategy","Product, R&D & Strategy",N-2,e0yvw2,False,0.0270042194092827
+96pnd,Health Care,jedw1q,"Vice President, Product, R&D and Strategy","Product, R&D & Strategy",N-2,56n1lv,False,0.013333333333333334
+96pnd,Health Care,yrq8jv,"Senior Vice President, Commercial Operations",Commercial Operations,N-2,de7w9m,True,0.8888888888888888
+96pnd,Health Care,yrq8jv,"Senior Vice President, Commercial Operations",Commercial Operations,N-2,1xpmwq,True,0.0
+96pnd,Health Care,yrq8jv,"Senior Vice President, Commercial Operations",Commercial Operations,N-2,e0yvw2,True,0.0
+96pnd,Health Care,q6dznn,"Vice President, Software and Infrastructure",Software & Infrastructure,N-2,de7w9m,False,0.764705882352941
+96pnd,Health Care,q6dznn,"Vice President, Software and Infrastructure",Software & Infrastructure,N-2,1xpmwq,False,0.0
+96pnd,Health Care,q6dznn,"Vice President, Software and Infrastructure",Software & Infrastructure,N-2,e0yvw2,False,0.0
+96pnd,Health Care,8jm7rm,"Vice President, Marketing",Marketing,N-2,de7w9m,True,0.7647058823529411
+96pnd,Health Care,8jm7rm,"Vice President, Marketing",Marketing,N-2,56n1lv,True,0.013888888888888888
+96pnd,Health Care,8jm7rm,"Vice President, Marketing",Marketing,N-2,1xpmwq,False,0.0
+96pnd,Health Care,qy68wn,"Senior Vice President, Global Sales",Sales,N-2,de7w9m,True,0.9230769230769231
+96pnd,Health Care,qy68wn,"Senior Vice President, Global Sales",Sales,N-2,1xpmwq,False,0.0
+96pnd,Health Care,qy68wn,"Senior Vice President, Global Sales",Sales,N-2,e0yvw2,True,0.0
+96pnd,Health Care,56eo0v,"Vice President, Software Engineering",Software Engineering,N-2,e0yvw2,False,0.304755621844883
+96pnd,Health Care,56eo0v,"Vice President, Software Engineering",Software Engineering,N-2,1xpmwq,False,0.0
+96pnd,Health Care,56eo0v,"Vice President, Software Engineering",Software Engineering,N-2,de7w9m,False,0.0
