@@ -4,11 +4,14 @@ import numpy as np
 import time
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
+# from fuzzywuzzy import fuzz
+import textdistance
 
 try:
     stopwords.words('english')
 except LookupError:
     import nltk
+
     nltk.download('stopwords')
 
 
@@ -302,7 +305,8 @@ class ProxyCalculator:
         :param colname: name of the outputted column (where the result is saved)
         :return: DataFrame : input data plus the column containing the cosine similarity
         """
-        data[colname + '.sim'] = [textdistance.cosine(a, b) for a, b in zip(data[col1], data[col2])]
+        data[colname + '.sim'] = [len(set(a.split()).intersection(b.split())) / (len(a.split()) * len(b.split())) for
+                                  a, b in zip(data[col1], data[col2])]
         return data
 
     def __title_sim(self, data, level, alpha):
